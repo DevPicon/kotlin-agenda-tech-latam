@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Agenda Tech Latam</string>
+    <string name="sample_event_title">Evento Ejemplo 2017</string>
+    <string name="sample_event_country">País Ejemplo</string>
+    <string name="sample_event_city">Ciudad Ejemplo</string>
+    <string name="sample_event_type">Conferencia</string>
+    <string name="sample_event_date">00/00/2017</string>
+    <string name="sample_event_venue_name">Evento Lugar Nombre</string>
+    <string name="sample_event_venue_address">Evento Ejemplo Direccion</string>
+    <string name="sample_event_latitude">-12.0836453</string>
+    <string name="sample_event_longitude">-77.0514911</string>
+    <string name="sample_event_url">http://www.gdgopen.com</string>
+</resources>
