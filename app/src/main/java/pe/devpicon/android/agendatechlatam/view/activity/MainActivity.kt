@@ -2,9 +2,16 @@ package pe.devpicon.android.agendatechlatam.view.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.ErrorCodes
+import com.firebase.ui.auth.IdpResponse
+import com.firebase.ui.auth.ResultCodes
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import pe.devpicon.android.agendatechlatam.R
 import pe.devpicon.android.agendatechlatam.view.adapter.EventAdapter
@@ -33,6 +40,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showEvents(eventList: List<Event>) {
+        Log.d(javaClass.simpleName, "Ingreso a showEvents")
         adapter.items = eventList
         adapter.notifyDataSetChanged()
 
@@ -45,9 +53,77 @@ class MainActivity : AppCompatActivity(), MainView {
         initializeAdapter()
         initializeList()
         initializePresenter()
+        initializeFab()
         presenter?.getEvents()
 
     }
+
+    fun initializeFab() {
+
+        fab_new_event.setOnClickListener {
+            val auth = FirebaseAuth.getInstance()
+            if (auth.currentUser == null) {
+
+                startActivityForResult(AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setProviders(listOf(
+                                AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
+
+                        ))
+                        .build(), NewEventActivity.RC_SIGN_IN)
+
+            } else {
+
+                goToNewEventActivity()
+
+            }
+        }
+
+
+    }
+
+    private fun goToNewEventActivity() {
+        var intent = Intent(this@MainActivity, NewEventActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == NewEventActivity.RC_SIGN_IN) {
+            val response = IdpResponse.fromResultIntent(data)
+            if (resultCode == ResultCodes.OK) {
+                goToNewEventActivity()
+                finish()
+                return
+            } else {
+
+                if (response == null) {
+                    showSnackbar(R.string.sign_in_cancelled);
+                    return;
+                }
+
+                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    showSnackbar(R.string.no_internet_connection);
+                    return;
+                }
+
+                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                    showSnackbar(R.string.unknown_error);
+                    return;
+                }
+            }
+        }
+    }
+
+    private fun showSnackbar(messageId: Int) {
+        val snackbar = Snackbar.make(main_coordinator_layout, getString(messageId), Snackbar
+                .LENGTH_SHORT)
+        snackbar.show()
+
+    }
+
 
     private fun initializePresenter() {
         presenter = MainPresenter()
@@ -63,10 +139,10 @@ class MainActivity : AppCompatActivity(), MainView {
         adapter = EventAdapter()
     }*/
 
-    private fun initializeAdapter() = EventAdapter(itemClick = object : OnItemClickListener{
+    private fun initializeAdapter() = EventAdapter(itemClick = object : OnItemClickListener {
         override fun invoke(event: Event) {
 
-            var intent = Intent(this@MainActivity, EventDetailActivity::class.java )
+            var intent = Intent(this@MainActivity, EventDetailActivity::class.java)
             intent.putExtra("event", event)
             startActivity(intent)
 
