@@ -14,7 +14,8 @@
     <string name="hint_venue_name">Ingrese el nombre del lugar del evento</string>
     <string name="hint_venue_address">Ingrese la dirección del lugar del evento</string>
     <string name="btn_save_event">Guardar</string>
-    <string name="no_internet_connection">No hay conexión a internet.</string>
     <string name="unknown_error">Se produjo un error desconocido.</string>
     <string name="sign_in_cancelled">Ha cancelado el inicio de sesión</string>
+    <string name="message_empty_list">No hay elementos para mostrar</string>
+    <string name="message_not_connected">No hay conexión a internet.</string>
 </resources>

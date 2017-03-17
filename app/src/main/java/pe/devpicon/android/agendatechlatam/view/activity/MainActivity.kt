@@ -1,5 +1,6 @@
 package pe.devpicon.android.agendatechlatam.view.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -7,24 +8,37 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.ErrorCodes
-import com.firebase.ui.auth.IdpResponse
-import com.firebase.ui.auth.ResultCodes
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import pe.devpicon.android.agendatechlatam.R
 import pe.devpicon.android.agendatechlatam.view.adapter.EventAdapter
 import pe.devpicon.android.agendatechlatam.view.adapter.EventAdapter.OnItemClickListener
 import pe.devpicon.android.agendatechlatam.view.model.Event
-import pe.devpicon.android.agendatechlatam.view.presenter.MainPresenter
+import pe.devpicon.android.agendatechlatam.view.presenter.MainPresenterImpl
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainView
 
 class MainActivity : AppCompatActivity(), MainView {
+    override fun hideEmptyListMessage() {
+        txt_empty_list.visibility = View.GONE
+    }
 
-    //var adapter: EventAdapter? = null
+    override fun hideEvents() {
+        recycler_view.visibility = View.GONE
+    }
+
+    override fun hideNotConnectedMessage() {
+        txt_not_connected.visibility = View.GONE
+    }
+
+    override fun showNotConnectedMessage() {
+        txt_not_connected.visibility = View.VISIBLE
+    }
+
+    override fun getContext(): Context {
+        return this;
+    }
+
     val adapter: EventAdapter by lazy { initializeAdapter() }
-    var presenter: MainPresenter? = null
+    var presenter: MainPresenterImpl? = null
 
 
     override fun showLoading() {
@@ -36,13 +50,18 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showEmptyListMessage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        txt_empty_list.visibility = View.VISIBLE
     }
 
     override fun showEvents(eventList: List<Event>) {
+
         Log.d(javaClass.simpleName, "Ingreso a showEvents")
         adapter.items = eventList
         adapter.notifyDataSetChanged()
+
+
+        txt_empty_list.visibility = View.GONE
+        recycler_view.visibility = View.VISIBLE
 
     }
 
@@ -61,29 +80,13 @@ class MainActivity : AppCompatActivity(), MainView {
     fun initializeFab() {
 
         fab_new_event.setOnClickListener {
-            val auth = FirebaseAuth.getInstance()
-            if (auth.currentUser == null) {
-
-                startActivityForResult(AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setProviders(listOf(
-                                AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
-                                AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
-
-                        ))
-                        .build(), NewEventActivity.RC_SIGN_IN)
-
-            } else {
-
-                goToNewEventActivity()
-
-            }
+            presenter?.onFabClicked()
         }
 
 
     }
 
-    private fun goToNewEventActivity() {
+    override fun goToNewEventActivity() {
         var intent = Intent(this@MainActivity, NewEventActivity::class.java)
         startActivity(intent)
     }
@@ -91,34 +94,12 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == NewEventActivity.RC_SIGN_IN) {
-            val response = IdpResponse.fromResultIntent(data)
-            if (resultCode == ResultCodes.OK) {
-                goToNewEventActivity()
-                finish()
-                return
-            } else {
+        presenter?.onActivityResult(requestCode, resultCode, data)
 
-                if (response == null) {
-                    showSnackbar(R.string.sign_in_cancelled);
-                    return;
-                }
-
-                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    showSnackbar(R.string.no_internet_connection);
-                    return;
-                }
-
-                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                    showSnackbar(R.string.unknown_error);
-                    return;
-                }
-            }
-        }
     }
 
-    private fun showSnackbar(messageId: Int) {
-        val snackbar = Snackbar.make(main_coordinator_layout, getString(messageId), Snackbar
+    override fun showSnackbar(stringResourceId: Int) {
+        val snackbar = Snackbar.make(main_coordinator_layout, getString(stringResourceId), Snackbar
                 .LENGTH_SHORT)
         snackbar.show()
 
@@ -126,7 +107,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
 
     private fun initializePresenter() {
-        presenter = MainPresenter()
+        presenter = MainPresenterImpl()
         presenter?.setView(this)
     }
 
@@ -135,18 +116,18 @@ class MainActivity : AppCompatActivity(), MainView {
         recycler_view.layoutManager = LinearLayoutManager(this)
     }
 
-    /* private fun initializeAdapter() {
-        adapter = EventAdapter()
-    }*/
-
     private fun initializeAdapter() = EventAdapter(itemClick = object : OnItemClickListener {
         override fun invoke(event: Event) {
 
-            var intent = Intent(this@MainActivity, EventDetailActivity::class.java)
-            intent.putExtra("event", event)
-            startActivity(intent)
+            goToEventDetailActivity(event)
 
         }
 
     })
+
+    override fun goToEventDetailActivity(event: Event) {
+        var intent = Intent(this@MainActivity, EventDetailActivity::class.java)
+        intent.putExtra("event", event)
+        startActivity(intent)
+    }
 }
