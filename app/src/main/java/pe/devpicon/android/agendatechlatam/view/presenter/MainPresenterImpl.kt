@@ -11,7 +11,6 @@ import com.firebase.ui.auth.ResultCodes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import pe.devpicon.android.agendatechlatam.R
-import pe.devpicon.android.agendatechlatam.view.activity.NewEventActivity
 import pe.devpicon.android.agendatechlatam.view.model.Event
 import pe.devpicon.android.agendatechlatam.view.model.EventModel
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainPresenter
@@ -22,9 +21,20 @@ import pe.devpicon.android.agendatechlatam.view.viewmvp.MainView
  * Created by armando on 3/10/17.
  */
 class MainPresenterImpl : MainPresenter {
+
+    lateinit var mainView: MainView
+
+    fun setView(mainView: MainView) {
+        this.mainView = mainView
+    }
+
+    companion object {
+        val RC_SIGN_IN = 123
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (requestCode == NewEventActivity.RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == ResultCodes.OK) {
                 mainView.goToNewEventActivity()
@@ -50,11 +60,6 @@ class MainPresenterImpl : MainPresenter {
         }
     }
 
-    lateinit var mainView: MainView
-
-    fun setView(mainView: MainView) {
-        this.mainView = mainView
-    }
 
     override fun getEvents() {
         Log.d(javaClass.simpleName, "Entró a getEvents")
@@ -145,7 +150,7 @@ class MainPresenterImpl : MainPresenter {
                         AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
 
                 ))
-                .build(), NewEventActivity.RC_SIGN_IN)
+                .build(), RC_SIGN_IN)
     }
 
     private fun isConnected(): Boolean {
