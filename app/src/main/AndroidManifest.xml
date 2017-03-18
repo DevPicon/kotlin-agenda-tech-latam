@@ -21,7 +21,9 @@
             android:parentActivityName=".view.activity.MainActivity"
             android:theme="@style/AppTheme2">
         </activity>
-        <activity android:name=".view.activity.NewEventActivity">
+        <activity
+            android:name=".view.activity.NewEventActivity"
+            android:parentActivityName=".view.activity.MainActivity">
         </activity>
     </application>
 
