@@ -16,11 +16,12 @@
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="72dp"
-            app:titleEnabled="false"
             app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
             <ImageView
+                android:id="@+id/img_event_detail_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -33,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:navigationIcon="@drawable/arrow_left"
                 app:contentInsetStart="72dp"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/arrow_left"/>
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -88,11 +89,11 @@
 
     <Button
         android:id="@+id/btn_rsvp"
-        android:background="?colorPrimary"
-        android:layout_gravity="bottom"
-        android:text="Registrar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
+        android:layout_gravity="bottom"
+        android:background="?colorPrimary"
+        android:text="Registrar"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large.Inverse"/>
 
 </android.support.design.widget.CoordinatorLayout>
