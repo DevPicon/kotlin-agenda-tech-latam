@@ -74,3 +74,6 @@ fabric.properties
 # *.iml
 # modules.xml
 # *.ipr
+
+**/*/res/values/secrets.xml
+google-services.json
