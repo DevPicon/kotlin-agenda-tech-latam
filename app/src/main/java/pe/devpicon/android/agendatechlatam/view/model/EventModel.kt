@@ -9,17 +9,20 @@ class EventModel{
     var date: String = ""
     var city: String = ""
     var country: String = ""
+    var imageUri: String = ""
 
     constructor(){
 
     }
 
-    constructor(name: String, type: String, date: String, city: String, country: String){
+    constructor(name: String, type: String, date: String, city: String, country: String,
+                imageUri: String) {
         this.name = name
         this.type = type
         this.date = date
         this.city = city
         this.country = country
+        this.imageUri = imageUri
 
 
     }
@@ -29,6 +32,7 @@ class EventModel{
             "type" to type,
             "date" to date,
             "city" to city,
-            "country" to country
+            "country" to country,
+            "imageUri" to imageUri
     )
 }

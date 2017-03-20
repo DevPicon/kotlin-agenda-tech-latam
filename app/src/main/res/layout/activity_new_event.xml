@@ -1,116 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             tools:context="pe.devpicon.android.agendatechlatam.view.activity.NewEventActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/img_new_event_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="pe.devpicon.android.agendatechlatam.view.activity.NewEventActivity">
-
-    <EditText
-        android:id="@+id/edt_new_event_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:ems="10"
-        android:hint="Ingrese el nombre del evento"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"/>
-
-    <Spinner
-        android:id="@+id/spn_new_event_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_new_event_name"/>
-
-    <EditText
-        android:id="@+id/edt_new_event_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spn_new_event_type"
-        android:ems="10"
-        android:hint="Ingrese la fecha del evento"
-        android:inputType="date"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"/>
-
-    <EditText
-        android:id="@+id/edt_new_event_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_new_event_date"
-        android:ems="10"
-        android:hint="Ingrese el nombre de la ciudad"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"/>
-
-    <Spinner
-        android:id="@+id/spn_new_event_country"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_new_event_city"/>
-
-    <EditText
-        android:id="@+id/edt_new_event_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spn_new_event_country"
-        android:ems="10"
-        android:hint="Ingrese la url del evento"
-        android:inputType="textUri"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"/>
+                android:layout_height="192dp"
+                android:layout_alignParentStart="true"
+                android:background="?colorPrimary"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_image"/>
 
 
-    <TextView
-        android:id="@+id/txt_title_venue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_new_event_url"
-        android:text="@string/label_venue"/>
+            <TextView
+                android:id="@+id/txt_label_event_name"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_new_event_image"
+                android:labelFor="@+id/spn_new_event_type"
+                android:text="@string/hint_insert_event_name"
+                />
 
 
-    <EditText
-        android:id="@+id/edt_new_event_venue_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_title_venue"
-        android:ems="10"
-        android:hint="@string/hint_venue_name"
-        android:inputType="textUri"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"/>
+            <EditText
+                android:id="@+id/edt_new_event_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_label_event_name"
+                android:inputType="text"
+                android:paddingBottom="8dp"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="3dp"/>
+
+            <TextView
+                android:id="@+id/txt_label_event_type"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_new_event_name"
+                android:labelFor="@+id/spn_new_event_type"
+                android:text="@string/label_select_event_type"
+                />
 
 
-    <EditText
-        android:id="@+id/edt_new_event_venue_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edt_new_event_venue_name"
-        android:ems="10"
-        android:hint="@string/hint_venue_address"
-        android:inputType="textUri"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="3dp"/>
+            <Spinner
+                android:id="@+id/spn_new_event_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_label_event_type"
+                android:layout_marginBottom="4dp"
+                android:focusable="true"/>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/edt_new_event_venue_address"
-        android:layout_gravity="bottom"/>
+
+            <TextView
+                android:id="@+id/txt_label_event_date"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spn_new_event_type"
+                android:labelFor="@+id/edt_new_event_date"
+                android:text="@string/label_insert_event_date"
+                />
+
+            <EditText
+                android:id="@+id/edt_new_event_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_label_event_date"
+                android:ems="10"
+                android:hint="@string/hint_insert_event_date"
+                android:inputType="date"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="3dp"/>
+
+
+            <TextView
+                android:id="@+id/txt_label_event_city"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_new_event_date"
+                android:labelFor="@+id/edt_new_event_city"
+                android:text="@string/hint_insert_city"/>
+
+
+            <EditText
+                android:id="@+id/edt_new_event_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_label_event_city"
+                android:ems="10"
+                android:hint="@string/hint_insert_city"
+                android:inputType="text"
+                android:nextFocusDown="@+id/spn_new_event_country"
+                android:nextFocusForward="@+id/spn_new_event_country"
+                android:nextFocusRight="@+id/spn_new_event_country"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="3dp"/>
+
+
+            <TextView
+                android:id="@+id/txt_label_event_country"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_new_event_city"
+                android:labelFor="@+id/spn_new_event_country"
+                android:text="@string/label_select_country"/>
+
+
+            <Spinner
+                android:id="@+id/spn_new_event_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_label_event_country"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
+
+
+            <TextView
+                android:id="@+id/txt_label_event_url"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spn_new_event_country"
+                android:labelFor="@+id/spn_new_event_type"
+                android:text="@string/hint_insert_event_url"/>
+
+            <EditText
+                android:id="@+id/edt_new_event_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_label_event_url"
+                android:ems="10"
+                android:hint="@string/hint_insert_event_url"
+                android:inputType="textUri"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="3dp"/>
+
+            <TextView
+                android:id="@+id/txt_title_venue"
+                style="@style/label_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_new_event_url"
+                android:text="@string/label_venue"/>
+
+
+            <EditText
+                android:id="@+id/edt_new_event_venue_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_title_venue"
+                android:ems="10"
+                android:hint="@string/hint_venue_name"
+                android:inputType="textUri"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="3dp"/>
+
+
+            <EditText
+                android:id="@+id/edt_new_event_venue_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_new_event_venue_name"
+                android:ems="10"
+                android:hint="@string/hint_venue_address"
+                android:inputType="textUri"
+                tools:layout_editor_absoluteX="2dp"
+                tools:layout_editor_absoluteY="3dp"/>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/edt_new_event_venue_address"
+                android:layout_gravity="bottom"/>
+
+        </RelativeLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btn_new_event_save"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="bottom"
         android:background="?colorPrimary"
         android:text="@string/btn_save_event"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large.Inverse"/>
-
-
-</RelativeLayout>
+</FrameLayout>

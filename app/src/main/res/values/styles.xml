@@ -15,4 +15,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="label_style">
+        <item name="android:paddingBottom">@dimen/size_8dp</item>
+        <item name="android:paddingTop">@dimen/size_16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
+    </style>
+
 </resources>

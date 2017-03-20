@@ -18,4 +18,11 @@
     <string name="sign_in_cancelled">Ha cancelado el inicio de sesión</string>
     <string name="message_empty_list">No hay elementos para mostrar</string>
     <string name="message_not_connected">No hay conexión a internet.</string>
+    <string name="label_select_country">Seleccione el país</string>
+    <string name="hint_insert_city">Ingrese la ciudad</string>
+    <string name="label_insert_event_date">Ingrese la fecha del evento</string>
+    <string name="label_select_event_type">Seleccione el tipo de evento</string>
+    <string name="hint_insert_event_name">Ingrese el nombre del evento</string>
+    <string name="hint_insert_event_url">Ingrese la url del evento</string>
+    <string name="hint_insert_event_date">dd/mm/aaaa</string>
 </resources>

@@ -31,10 +31,11 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
 
+        presenter.setView(this)
+
         setupToolbar()
         initializeContent()
 
-        presenter.setView(this)
 
 
     }

@@ -17,6 +17,10 @@ import pe.devpicon.android.agendatechlatam.view.presenter.MainPresenterImpl
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainView
 
 class MainActivity : AppCompatActivity(), MainView {
+
+    val adapter: EventAdapter by lazy { initializeAdapter() }
+    var presenter: MainPresenterImpl? = null
+
     override fun hideEmptyListMessage() {
         txt_empty_list.visibility = View.GONE
     }
@@ -36,10 +40,6 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun getContext(): Context {
         return this;
     }
-
-    val adapter: EventAdapter by lazy { initializeAdapter() }
-    var presenter: MainPresenterImpl? = null
-
 
     override fun showLoading() {
         progress_loading.visibility = View.VISIBLE

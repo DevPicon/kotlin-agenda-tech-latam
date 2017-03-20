@@ -9,12 +9,17 @@ import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.auth.ResultCodes
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import pe.devpicon.android.agendatechlatam.R
 import pe.devpicon.android.agendatechlatam.view.model.Event
 import pe.devpicon.android.agendatechlatam.view.model.EventModel
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainPresenter
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainView
+import java.text.SimpleDateFormat
 
 
 /**
@@ -75,7 +80,7 @@ class MainPresenterImpl : MainPresenter {
 
             val database: FirebaseDatabase = FirebaseDatabase.getInstance();
             val myRef: DatabaseReference = database.getReference("events");
-            myRef.addValueEventListener(object : ValueEventListener {
+            myRef.orderByChild("date").addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError?) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
@@ -115,23 +120,24 @@ class MainPresenterImpl : MainPresenter {
             mainView.hideEvents()
 
         }
-        /*val eventList = arrayListOf<Event>(
-                Event(1, "DevFest Lima 2017", "evento", "16/09/2017", "Lima", "Peru"),
-                Event(2, "Droidcon Santo Domingo 2017", "conferencia", "03/03/2017", "Santo " +
-                        "Domingo",
-                        "República Dominicana"),
-                Event(3, "DevFest Cochabamba 2017", "evento", "16/09/2017", "Cochabamba",
-                        "Bolivia"),
-                Event(4, "DevFest La Paz 2017", "evento", "16/09/2017", "La Paz", "Bolivia")
-        )*/
 
 
     }
 
     private fun mapIntoEvent(value: EventModel): Event {
         Log.d(javaClass.simpleName, "Ingreso a mapIntoEvent")
-        return Event(0, value.name, value.type, value.date, value.city, value.country)
+        return Event(0, value.name, value.type, dateFormat(value.date), value.city, value
+                .country, value
+                .imageUri)
     }
+
+    private fun dateFormat(date: String): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val parsedDate = dateFormat.parse(date)
+        val dateFormat2 = SimpleDateFormat("dd/MM/yyyy")
+        return dateFormat2.format(parsedDate)
+    }
+
 
     override fun onFabClicked() {
         val auth = FirebaseAuth.getInstance()
