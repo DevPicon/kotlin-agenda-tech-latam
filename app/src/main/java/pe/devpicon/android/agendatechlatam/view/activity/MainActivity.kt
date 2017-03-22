@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import pe.devpicon.android.agendatechlatam.R
 import pe.devpicon.android.agendatechlatam.view.adapter.EventAdapter
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_main)
 
         initializeAdapter()

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.util.Log
+import com.crashlytics.android.Crashlytics
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
@@ -43,7 +44,6 @@ class MainPresenterImpl : MainPresenter {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == ResultCodes.OK) {
                 mainView.goToNewEventActivity()
-                mainView.finish()
                 return
             } else {
 
@@ -141,9 +141,15 @@ class MainPresenterImpl : MainPresenter {
 
     override fun onFabClicked() {
         val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser == null) {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
             showSignInActivity()
         } else {
+
+            Crashlytics.setUserIdentifier(currentUser.uid)
+            Crashlytics.setUserEmail(currentUser.email)
+            Crashlytics.setUserName(currentUser.displayName)
+
             mainView.goToNewEventActivity()
         }
     }
@@ -155,7 +161,7 @@ class MainPresenterImpl : MainPresenter {
                         AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                         AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build()
 
-                ))
+                )).setIsSmartLockEnabled(false)
                 .build(), RC_SIGN_IN)
     }
 
