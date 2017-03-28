@@ -21,6 +21,7 @@ import pe.devpicon.android.agendatechlatam.view.model.EventModel
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainPresenter
 import pe.devpicon.android.agendatechlatam.view.viewmvp.MainView
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -80,7 +81,8 @@ class MainPresenterImpl : MainPresenter {
 
             val database: FirebaseDatabase = FirebaseDatabase.getInstance();
             val myRef: DatabaseReference = database.getReference("events");
-            myRef.orderByChild("date").addValueEventListener(object : ValueEventListener {
+            val query = myRef.orderByChild("date").startAt(dateString())
+            query.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError?) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
@@ -142,6 +144,11 @@ class MainPresenterImpl : MainPresenter {
         val parsedDate = dateFormat.parse(date)
         val dateFormat2 = SimpleDateFormat("dd/MM/yyyy")
         return dateFormat2.format(parsedDate)
+    }
+
+    private fun dateString(): String{
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return dateFormat.format(Date())
     }
 
 

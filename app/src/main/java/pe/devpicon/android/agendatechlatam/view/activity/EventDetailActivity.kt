@@ -44,6 +44,7 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, View.OnClickLi
             txt_detail_event_city.text = city
             txt_detail_event_country.text = country
             supportActionBar?.title = name
+            txt_detail_event_type.text = type
             img_event_detail_cover.loadImage(imageUrl)
         }
     }

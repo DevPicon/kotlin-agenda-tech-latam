@@ -171,6 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txt_title_venue"
                     android:ems="10"
+                    android:visibility="gone"
                     android:hint="@string/hint_venue_name"
                     android:inputType="textUri"
                     tools:layout_editor_absoluteX="2dp"
@@ -185,11 +186,13 @@
                     android:ems="10"
                     android:hint="@string/hint_venue_address"
                     android:inputType="textUri"
+                    android:visibility="gone"
                     tools:layout_editor_absoluteX="2dp"
                     tools:layout_editor_absoluteY="3dp"/>
 
                 <com.google.android.gms.maps.MapView
                     android:id="@+id/mapView"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_below="@+id/edt_new_event_venue_address"
