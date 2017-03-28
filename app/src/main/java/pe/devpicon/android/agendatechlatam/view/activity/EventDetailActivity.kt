@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import pe.devpicon.android.agendatechlatam.R
@@ -26,8 +27,14 @@ class EventDetailActivity : AppCompatActivity(), EventDetailView, View.OnClickLi
     }
 
     override fun openURL(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        if(intent.resolveActivity(packageManager) != null){
+            startActivity(intent)
+        }else
+        {
+            Log.d(javaClass.simpleName, "No se pudo resolver el intent")
+        }
     }
 
     override fun showEvent(event: Event) {

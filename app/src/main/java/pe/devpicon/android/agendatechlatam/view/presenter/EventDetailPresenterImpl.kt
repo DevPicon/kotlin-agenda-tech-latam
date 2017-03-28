@@ -1,6 +1,7 @@
 package pe.devpicon.android.agendatechlatam.view.presenter
 
 import android.content.Intent
+import android.util.Log
 import pe.devpicon.android.agendatechlatam.view.model.Event
 import pe.devpicon.android.agendatechlatam.view.viewmvp.EventDetailPresenter
 import pe.devpicon.android.agendatechlatam.view.viewmvp.EventDetailView
@@ -23,6 +24,7 @@ class EventDetailPresenterImpl : EventDetailPresenter {
 
     override fun getContentFromIntent(intent: Intent) {
         event = intent.getParcelableExtra<Event>("event")
+        Log.d(javaClass.simpleName, event.toString())
         detailView.showEvent(event)
     }
 

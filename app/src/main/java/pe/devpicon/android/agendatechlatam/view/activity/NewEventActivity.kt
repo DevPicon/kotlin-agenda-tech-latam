@@ -82,7 +82,8 @@ class NewEventActivity : AppCompatActivity(), NewEventView, View.OnClickListener
                 edt_new_event_date.text.toString(),
                 edt_new_event_city.text.toString(),
                 spn_new_event_country.selectedItem.toString(),
-                localImageUri
+                localImageUri,
+                edt_new_event_url.text.toString()
         )
 
         presenter.onSaveButtonClick(model)

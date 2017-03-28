@@ -25,11 +25,19 @@
             android:name=".view.activity.EventDetailActivity"
             android:parentActivityName=".view.activity.MainActivity"
             android:theme="@style/AppTheme2">
+            <intent-filter>
+                <data android:scheme="http" android:host="www.eventech.com" />
+                <data android:scheme="https" android:host="www.eventech.com" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.NewEventActivity"
             android:parentActivityName=".view.activity.MainActivity">
         </activity>
+
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -6,7 +6,7 @@ import android.os.Parcelable
 /**
  * Created by armando on 3/9/17.
  */
-data class Event(val id: Int,
+data class Event(val id: String,
                  val name: String,
                  val type: String,
                  val date: String,
@@ -24,7 +24,7 @@ data class Event(val id: Int,
     }
 
     constructor(source: Parcel):this(
-            source.readInt(),
+            source.readString(),
             source.readString(),
             source.readString(),
             source.readString(),
@@ -37,7 +37,7 @@ data class Event(val id: Int,
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.let {
-            dest.writeInt(id)
+            dest.writeString(id)
             dest.writeString(name)
             dest.writeString(type)
             dest.writeString(date)

@@ -89,8 +89,9 @@ class MainPresenterImpl : MainPresenter {
                     snapshot?.let {
                         snapshot.children.forEach {
                             Log.d(javaClass.simpleName, it.key)
+                            val key = it.key
                             val value = it.getValue(EventModel::class.java)
-                            value?.let { eventList.add(mapIntoEvent(it)) }
+                            value?.let { value -> eventList.add(mapIntoEvent(key, value)) }
                         }
 
                     }
@@ -124,11 +125,16 @@ class MainPresenterImpl : MainPresenter {
 
     }
 
-    private fun mapIntoEvent(value: EventModel): Event {
+    private fun mapIntoEvent(key:String, value: EventModel): Event {
         Log.d(javaClass.simpleName, "Ingreso a mapIntoEvent")
-        return Event(0, value.name, value.type, dateFormat(value.date), value.city, value
-                .country, value
-                .imageUri)
+        return Event(key,
+                value.name,
+                value.type,
+                dateFormat(value.date),
+                value.city,
+                value.country,
+                value.imageUri,
+                value.url)
     }
 
     private fun dateFormat(date: String): String {

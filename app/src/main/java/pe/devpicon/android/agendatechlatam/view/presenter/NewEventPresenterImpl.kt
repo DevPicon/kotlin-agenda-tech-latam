@@ -141,7 +141,6 @@ class NewEventPresenterImpl : NewEventPresenter {
                 ) {
             requestRequiredPermissions()
         } else {
-
             saveModel(model)
 
         }
