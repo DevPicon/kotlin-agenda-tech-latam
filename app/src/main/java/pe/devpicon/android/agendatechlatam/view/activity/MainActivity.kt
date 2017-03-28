@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), MainView {
         Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_main)
 
-        initializeAdapter()
+        //initializeAdapter()
         initializeList()
         initializePresenter()
         initializeFab()

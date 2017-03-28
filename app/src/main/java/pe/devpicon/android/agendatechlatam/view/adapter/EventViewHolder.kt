@@ -12,10 +12,12 @@ import pe.devpicon.android.agendatechlatam.view.model.Event
 class EventViewHolder(itemView: View, val itemClick: EventAdapter.OnItemClickListener):RecyclerView
 .ViewHolder(itemView){
     fun bindEvent(event:Event){
-        itemView.txt_item_event_title.text = event.name
-        itemView.txt_item_event_country.text = event.country
-        itemView.txt_item_event_date.text = event.date
-        itemView.img_item_event_image.loadImage(event.imageUrl)
-        itemView.setOnClickListener{itemClick(event)}
+        with(event){
+            itemView.txt_item_event_title.text = name
+            itemView.txt_item_event_country.text = country
+            itemView.txt_item_event_date.text = date
+            itemView.img_item_event_image.loadImage(imageUrl)
+            itemView.setOnClickListener{itemClick(this)}
+        }
     }
 }

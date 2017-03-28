@@ -17,10 +17,11 @@ class EventAdapter(var items: List<Event> = mutableListOf(), val itemClick: OnIt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.event_item, parent, false)
+
         return EventViewHolder(itemView, itemClick)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount() = items.size
 
     interface OnItemClickListener {
         operator fun invoke(event:Event)

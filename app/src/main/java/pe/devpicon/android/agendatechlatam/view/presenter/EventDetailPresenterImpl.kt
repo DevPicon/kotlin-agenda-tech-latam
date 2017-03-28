@@ -10,16 +10,19 @@ import pe.devpicon.android.agendatechlatam.view.viewmvp.EventDetailView
  */
 class EventDetailPresenterImpl : EventDetailPresenter {
 
+    lateinit var event : Event
     lateinit var detailView: EventDetailView
+
+    override fun onRSVPButtonClicked() {
+        detailView.openURL(event.url)
+    }
 
     override fun setView(detailView: EventDetailView) {
         this.detailView = detailView
-
     }
 
     override fun getContentFromIntent(intent: Intent) {
-        val event = intent.getParcelableExtra<Event>("event")
-
+        event = intent.getParcelableExtra<Event>("event")
         detailView.showEvent(event)
     }
 

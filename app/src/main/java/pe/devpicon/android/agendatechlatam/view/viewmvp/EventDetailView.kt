@@ -8,10 +8,11 @@ import pe.devpicon.android.agendatechlatam.view.model.Event
  */
 interface EventDetailView {
     fun showEvent(event: Event)
-
+    fun openURL(url: String)
 }
 
 interface EventDetailPresenter {
     fun setView(detailView: EventDetailView)
     fun getContentFromIntent(intent: Intent)
+    fun onRSVPButtonClicked()
 }

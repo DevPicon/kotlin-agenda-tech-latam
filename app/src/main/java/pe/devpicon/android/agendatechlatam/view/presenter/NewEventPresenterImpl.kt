@@ -186,7 +186,6 @@ class NewEventPresenterImpl : NewEventPresenter {
                     val updateChildren = database.reference.updateChildren(childUpdates).addOnCompleteListener {
 
                         newEventView.goToMainActivity()
-                        newEventView.finish()
 
                     }
                 }

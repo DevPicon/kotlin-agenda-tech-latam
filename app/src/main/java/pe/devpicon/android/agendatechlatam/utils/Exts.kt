@@ -11,3 +11,5 @@ import pe.devpicon.android.agendatechlatam.R
 infix fun ImageView.loadImage(url: String) {
     Glide.with(this.context).load(url).error(R.drawable.default_image).fitCenter().into(this)
 }
+
+fun hola(nombre:String) = "Hola $nombre"

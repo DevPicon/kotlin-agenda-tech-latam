@@ -48,8 +48,8 @@ class MainPresenterImpl : MainPresenter {
             } else {
 
                 if (response == null) {
-                    mainView.showSnackbar(R.string.sign_in_cancelled);
-                    return;
+                    mainView.showSnackbar(R.string.sign_in_cancelled)
+                    return
                 }
 
                 if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
