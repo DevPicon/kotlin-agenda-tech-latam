@@ -18,6 +18,6 @@ Para hacer funcionar esta aplicación es necesario que se obtenga una API key de
 
 ## Capturas de pantalla
 
-![Screenshot 1](https://github.com/DevPicon/kotlin-agenda-tech-latam/blob/master/screenshots/device-2017-03-15-204841.png)
-![Screenshot 2](https://github.com/DevPicon/kotlin-agenda-tech-latam/blob/master/screenshots/device-2017-03-15-204918.png)
-![Screenshot 3](https://github.com/DevPicon/kotlin-agenda-tech-latam/blob/master/screenshots/device-2017-03-15-204933.png)
+![Screenshot 1](https://github.com/DevPicon/kotlin-agenda-tech-latam/blob/master/screenshots/device-2017-03-15-204841.png | width=150)
+![Screenshot 2](https://github.com/DevPicon/kotlin-agenda-tech-latam/blob/master/screenshots/device-2017-03-15-204918.png | width=150)
+![Screenshot 3](https://github.com/DevPicon/kotlin-agenda-tech-latam/blob/master/screenshots/device-2017-03-15-204933.png | width=150)
