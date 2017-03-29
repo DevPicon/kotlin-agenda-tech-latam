@@ -140,10 +140,20 @@ class MainPresenterImpl : MainPresenter {
     }
 
     private fun dateFormat(date: String): String {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val parsedDate = dateFormat.parse(date)
-        val dateFormat2 = SimpleDateFormat("dd/MM/yyyy")
-        return dateFormat2.format(parsedDate)
+        var result:String = ""
+
+        if(date != ""){
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val parsedDate = dateFormat.parse(date)
+            val dateFormat2 = SimpleDateFormat("dd/MM/yyyy")
+            result = dateFormat2.format(parsedDate)
+
+        } else{
+            val dateFormat2 = SimpleDateFormat("dd/MM/yyyy")
+            result = dateFormat2.format(Date())
+        }
+
+        return result
     }
 
     private fun dateString(): String{

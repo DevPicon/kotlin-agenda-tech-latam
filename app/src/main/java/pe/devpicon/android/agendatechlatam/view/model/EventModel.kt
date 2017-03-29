@@ -1,8 +1,11 @@
 package pe.devpicon.android.agendatechlatam.view.model
 
+import android.support.annotation.Keep
+
 /**
  * Created by armando on 3/14/17.
  */
+@Keep
 class EventModel{
     var name: String = ""
     var type: String = ""
