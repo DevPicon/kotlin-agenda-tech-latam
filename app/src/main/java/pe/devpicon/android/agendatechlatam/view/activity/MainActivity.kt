@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -11,6 +12,7 @@ import android.view.View
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.event_item.*
 import pe.devpicon.android.agendatechlatam.R
 import pe.devpicon.android.agendatechlatam.view.adapter.EventAdapter
 import pe.devpicon.android.agendatechlatam.view.adapter.EventAdapter.OnItemClickListener
@@ -131,6 +133,8 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun goToEventDetailActivity(event: Event) {
         var intent = Intent(this@MainActivity, EventDetailActivity::class.java)
         intent.putExtra("event", event)
-        startActivity(intent)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity,
+                img_item_event_image, "activity_image_transition")
+        startActivity(intent, options.toBundle())
     }
 }
