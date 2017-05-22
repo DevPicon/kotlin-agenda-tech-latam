@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Agenda Tech Latam</string>
+    <string name="app_name">Eventech</string>
     <string name="sample_event_title">Evento Ejemplo 2017</string>
     <string name="sample_event_country">País Ejemplo</string>
     <string name="sample_event_city">Ciudad Ejemplo</string>
@@ -30,4 +30,5 @@
     <string name="label_detail_country">País</string>
     <string name="label_detail_type">Tipo de evento</string>
     <string name="label_button_rsvp">Ir a web del evento</string>
+    <string name="content_description_event_image">Esta es una imagen representativa del evento</string>
 </resources>

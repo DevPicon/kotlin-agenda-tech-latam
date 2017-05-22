@@ -16,6 +16,7 @@ class EventViewHolder(itemView: View, val itemClick: EventAdapter.OnItemClickLis
             itemView.txt_item_event_title.text = name
             itemView.txt_item_event_country.text = country
             itemView.txt_item_event_date.text = date
+            itemView.txt_item_event_type.text = type
             itemView.img_item_event_image.loadImage(imageUrl)
             itemView.setOnClickListener{itemClick(this)}
         }
