@@ -33,6 +33,8 @@ class NewEventActivity : AppCompatActivity(), NewEventView, View.OnClickListener
         initializeSaveButton()
         initializeImageCover()
 
+
+
     }
 
     override fun showImage(uri: Uri?) {
